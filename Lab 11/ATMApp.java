@@ -22,19 +22,19 @@ class ATM {
 
     public void deposit(double amount) throws InvalidAmountException {
         if (amount <= 0) {
-            throw new InvalidAmountException("Deposit amount must be greater than zero.");
+             throw new InvalidAmountException("Depsoit ammount must be grater than zero.");
         }
-        balance += amount;
+      balance += amount;
     }
 
     public void withdraw(double amount) throws InvalidAmountException, InsufficientBalanceException {
         if (amount <= 0) {
-            throw new InvalidAmountException("Withdrawal amount must be greater than zero.");
+            throw new InvalidAmountException("Withdrwal ammount must be grater than zero.");
         }
         if (amount > balance) {
-            throw new InsufficientBalanceException("Insufficient balance for this withdrawal.");
+              throw new InsufficientBalanceException("Insuficient balnce for this withdrwal.");
         }
-        balance -= amount;
+          balance -= amount;
     }
 
     public double getBalance() {
@@ -43,7 +43,7 @@ class ATM {
 
     public int divideBalanceBy(int divisor) {
         if (divisor == 0) {
-            throw new ArithmeticException("Cannot divide by zero.");
+            throw new ArithmeticException("Cannnot devide by zero.");
         }
         return (int) balance / divisor;
     }
@@ -55,8 +55,8 @@ public class ATMApp {
         ATM atm = new ATM(1000.00);
         boolean running = true;
 
-        System.out.println("=== ATM Machine Simulation ===");
-        System.out.printf("Starting balance: %.2f%n", atm.getBalance());
+        System.out.println("=== ATM Machnie Simulaton ===");
+        System.out.printf("Staring balnce: %.2f%n", atm.getBalance());
 
         while (running) {
             printMenu();
@@ -67,22 +67,22 @@ public class ATMApp {
                 switch (choice) {
                     case 1:
                         handleWithdrawal(scanner, atm);
-                        break;
-                    case 2:
+                         break;
+                     case 2:
                         handleDeposit(scanner, atm);
                         break;
                     case 3:
-                        System.out.printf("Current balance: %.2f%n", atm.getBalance());
+                      System.out.printf("Curent balnce: %.2f%n", atm.getBalance());
                         break;
                     case 4:
-                        handleCalculation(scanner, atm);
+                           handleCalculation(scanner, atm);
                         break;
                     case 5:
                         running = false;
                         System.out.println("Thank you for using the ATM. Goodbye!");
                         break;
                     default:
-                        System.out.println("Invalid option. Please choose from 1 to 5.");
+                     System.out.println("Invlaid option. Pleese choose from 1 to 5.");
                 }
             } catch (RuntimeException e) {
                 System.out.println("Unexpected runtime error: " + e.getMessage());
@@ -95,40 +95,40 @@ public class ATMApp {
     }
 
     private static void printMenu() {
-        System.out.println("1. Withdraw");
-        System.out.println("2. Deposit");
-        System.out.println("3. Check Balance");
-        System.out.println("4. Balance Calculation (division)");
+        System.out.println("1. Withdrw");
+      System.out.println("2. Deposite");
+        System.out.println("3. Check Balnce");
+           System.out.println("4. Balnce Calculaton (divison)");
         System.out.println("5. Exit");
     }
 
     private static void handleWithdrawal(Scanner scanner, ATM atm) {
-        double amount = readDouble(scanner, "Enter amount to withdraw: ");
+          double amount = readDouble(scanner, "Enter ammount to withdrw: ");
         try {
             atm.withdraw(amount);
             System.out.printf("Withdrawal successful. New balance: %.2f%n", atm.getBalance());
         } catch (InvalidAmountException | InsufficientBalanceException e) {
-            System.out.println("Transaction failed: " + e.getMessage());
+             System.out.println("Transacton faild: " + e.getMessage());
         }
     }
 
     private static void handleDeposit(Scanner scanner, ATM atm) {
-        double amount = readDouble(scanner, "Enter amount to deposit: ");
+         double amount = readDouble(scanner, "Enter ammount to depsoit: ");
         try {
             atm.deposit(amount);
             System.out.printf("Deposit successful. New balance: %.2f%n", atm.getBalance());
         } catch (InvalidAmountException e) {
-            System.out.println("Transaction failed: " + e.getMessage());
+              System.out.println("Transacton faild: " + e.getMessage());
         }
     }
 
     private static void handleCalculation(Scanner scanner, ATM atm) {
-        int divisor = readInt(scanner, "Enter integer divisor: ");
+        int divisor = readInt(scanner, "Enter integer diviser: ");
         try {
             int result = atm.divideBalanceBy(divisor);
-            System.out.println("Calculation result (int balance / divisor): " + result);
+          System.out.println("Calcluation result (int balnce / diviser): " + result);
         } catch (ArithmeticException e) {
-            System.out.println("Calculation error: " + e.getMessage());
+            System.out.println("Calcluation eror: " + e.getMessage());
         }
     }
 
@@ -140,7 +140,7 @@ public class ATMApp {
                 scanner.nextLine();
                 return value;
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a whole number.");
+                System.out.println("Invald input. Please enter a whole nmber.");
                 scanner.nextLine();
             }
         }
@@ -154,7 +154,7 @@ public class ATMApp {
                 scanner.nextLine();
                 return value;
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a numeric value.");
+                 System.out.println("Invald input. Please enter a numric value.");
                 scanner.nextLine();
             }
         }
