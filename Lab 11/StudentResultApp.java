@@ -5,10 +5,7 @@ import java.util.Scanner;
 
 class InvalidMarksException extends Exception {
     public InvalidMarksException(String message) {
-        super(message);
-    }
-}
-
+        super(message);}}
 class StudentResultProcessor {
     private static final double MAX_MARKS_PER_SUBJECT = 100.0;
     private final List<Double> marks;
@@ -24,29 +21,20 @@ class StudentResultProcessor {
         if (mark > MAX_MARKS_PER_SUBJECT) {
             throw new InvalidMarksException("Marks cannot exceed " + MAX_MARKS_PER_SUBJECT + ".");
         }
-        marks.add(mark);
-    }
-
+        marks.add(mark);}
     public double calculateTotal() {
         double total = 0;
         for (double mark : marks) {
             total += mark;
         }
-        return total;
-    }
-
+        return total;}
     public double calculateAverage() {
         if (marks.isEmpty()) {
             throw new ArithmeticException("Cannot calculate average: number of subjects is zero.");
         }
-        return calculateTotal() / marks.size();
-    }
-
+        return calculateTotal() / marks.size();}
     public int getSubjectCount() {
-        return marks.size();
-    }
-}
-
+        return marks.size();}}
 public class StudentResultApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -54,7 +42,7 @@ public class StudentResultApp {
 
         System.out.println("=== Student Result Processing System ===");
 
-        int subjectCount = readNonNegativeInt(scanner, "Enter number of subjects: ");
+        int subjectCount = readSubjectCount(scanner, "Enter number of subjects (0 - 5): ", 5);
 
         for (int i = 1; i <= subjectCount; i++) {
             boolean markSaved = false;
@@ -65,11 +53,7 @@ public class StudentResultApp {
                     processor.addMark(mark);
                     markSaved = true;
                 } catch (InvalidMarksException e) {
-                    System.out.println("Invalid marks: " + e.getMessage());
-                }
-            }
-        }
-
+                    System.out.println("Invalid marks: " + e.getMessage());}}}
         try {
             double total = processor.calculateTotal();
             double average = processor.calculateAverage();
@@ -84,11 +68,8 @@ public class StudentResultApp {
         } catch (RuntimeException e) {
             System.out.println("Unexpected runtime error: " + e.getMessage());
         } finally {
-            scanner.close();
-        }
-    }
-
-    private static int readNonNegativeInt(Scanner scanner, String prompt) {
+            scanner.close();}}
+    private static int readSubjectCount(Scanner scanner, String prompt, int maxSubjects) {
         while (true) {
             System.out.print(prompt);
             try {
@@ -99,15 +80,15 @@ public class StudentResultApp {
                     System.out.println("Input cannot be negative. Please enter 0 or greater.");
                     continue;
                 }
-
+                if (value > maxSubjects) {
+                    System.out.println("Maximum allowed subjects is " + maxSubjects + ". Please try again.");
+                    continue;
+                }
                 return value;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a whole number.");
                 scanner.nextLine();
-            }
-        }
-    }
-
+            }}}
     private static double readDouble(Scanner scanner, String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -118,7 +99,4 @@ public class StudentResultApp {
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter numeric marks.");
                 scanner.nextLine();
-            }
-        }
-    }
-}
+            }}}}
